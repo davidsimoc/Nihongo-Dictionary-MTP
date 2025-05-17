@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,22 +18,41 @@ namespace Nihongo_Dictionary
     /// <summary>
     /// Interaction logic for ApplicationMainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    /// 
+
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        private string? _currentUserRole;
+        public string? CurrentUserRole
+        {
+            get { return _currentUserRole; }
+            set
+            {
+                if (_currentUserRole != value)
+                {
+                    _currentUserRole = value;
+                    OnPropertyChanged(nameof(CurrentUserRole));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public MainWindow()
         {
             InitializeComponent();
-            MainContent.Content = new LoginControl(this); 
+            DataContext = this;
+            MainContent.Content = new LoginControl(this);
         }
+
         public void LoadDictionaryView()
         {
-            MainContent.Content = null;
-
-            var dictionaryControl = new DictionaryControl();
-
-            MainContent.Content = dictionaryControl;
-
-            Title = "Kanji Dictionary";
+            MainContent.Content = new MainAppView();
         }
     }
 }

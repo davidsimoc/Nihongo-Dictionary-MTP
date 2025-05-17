@@ -34,11 +34,20 @@ namespace Nihongo_Dictionary
 
             if (AuthenticateUser(username, password))
             {
+                System.Diagnostics.Debug.WriteLine($"CurrentUserRole after login: {_mainWindow.CurrentUserRole}");
                 if (rememberMe)
                 {
                     SaveSession(username); // Salvăm sesiunea dacă utilizatorul a bifat "Ține-mă minte"
                 }
-                _mainWindow.LoadDictionaryView();
+
+                // Creează o instanță a MainAppView
+                var mainAppView = new MainAppView();
+
+                // Setează MainAppView ca conținut al MainContent în MainWindow
+                if (Window.GetWindow(this) is MainWindow mainWindow)
+                {
+                    mainWindow.MainContent.Content = mainAppView;
+                }
             }
             else
             {
@@ -104,7 +113,7 @@ namespace Nihongo_Dictionary
                 try
                 {
                     connection.Open();
-                    string query = "SELECT Password FROM Users WHERE Username = @Username";
+                    string query = "SELECT Password, Role FROM Users WHERE Username = @Username";
                     using (SQLiteCommand command = new SQLiteCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Username", username);
@@ -115,6 +124,11 @@ namespace Nihongo_Dictionary
                                 string? storedPassword = reader["Password"].ToString();
                                 if (password.Equals(storedPassword))
                                 {
+                                    string? role = reader["Role"].ToString();
+                                    if (Window.GetWindow(this) is MainWindow mainWindow)
+                                    {
+                                        mainWindow.CurrentUserRole = role; // Use the property setter
+                                    }
                                     return true;
                                 }
                             }
@@ -183,13 +197,15 @@ namespace Nihongo_Dictionary
                 try
                 {
                     string username = File.ReadAllText(SessionFileName);
-                    // Încarcă username-ul în câmpul text
                     txtUsername.Text = username;
-                    //bifeaza checkbox
                     chkRememberMe.IsChecked = true;
-                    // Aici poți face direct logarea utilizatorului, fără a mai cere parola
-                    // Atenție: NU este sigur să salvezi parola în clar!
-                    _mainWindow.LoadDictionaryView();
+
+                    // Creează o instanță a MainAppView și o setează ca conținut
+                    var mainAppView = new MainAppView();
+                    if (Window.GetWindow(this) is MainWindow mainWindow)
+                    {
+                        mainWindow.MainContent.Content = mainAppView;
+                    }
                 }
                 catch (IOException ex)
                 {

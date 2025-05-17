@@ -84,5 +84,9 @@ namespace Nihongo_Dictionary
                 MessageBox.Show($"Eroare la citirea fișierului XML: {ex.Message}");
             }
         }
+        private void AddWordButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Se va deschide fereastra de adăugare cuvânt.");
+        }
     }
 }

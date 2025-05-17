@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nihongo_Dictionary"
         mc:Ignorable="d"
-        ResizeMode="CanResize"  
+        ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
-        Title="Nihongo Dictionary" 
-        WindowState="Maximized">
-    <Grid Background="#121212">
+        Title="Nihongo Dictionary"
+        WindowState="Maximized"
+        x:Name="mainWindow">
+    <Grid Background="{StaticResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -17,24 +18,9 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock 
-            x:Name="titleText"
-            Text="Welcom to Kanji Dictionary" 
-                    Foreground="#E5E5E5"
-                   FontSize="24"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-                   Margin="20"/>
-
-        <ContentControl x:Name="MainContent" 
-                        Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-                        Margin="20"/>
+        <ContentControl x:Name="MainContent" Grid.Row="1" Grid.Column="0" Margin="20"/>
 
     </Grid>
 </Window>

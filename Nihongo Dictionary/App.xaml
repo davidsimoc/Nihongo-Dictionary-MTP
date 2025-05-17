@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:Nihongo_Dictionary"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="PrimaryColor" Color="#D32F2F"/>
+        <SolidColorBrush x:Key="SecondaryColor" Color="#FF6F00"/>
+        <SolidColorBrush x:Key="BackgroundColor" Color="#121212"/>
+        <SolidColorBrush x:Key="TextColor" Color="#E5E5E5"/>
+        <SolidColorBrush x:Key="SecondaryText" Color="#A1A1A1"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#B0B0B0"/>
+        <SolidColorBrush x:Key="NavBarColor" Color="#1A1A1A"/>
+        <SolidColorBrush x:Key="AccentColor" Color="#FF1744"/>
+        <SolidColorBrush x:Key="SurfaceColor" Color="#2A2A2A"/>
     </Application.Resources>
 </Application>
