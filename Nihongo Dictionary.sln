@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nihongo Dictionary", "Nihongo Dictionary\Nihongo Dictionary.csproj", "{5E6E9156-5D0A-4867-9D54-986AEDCF2D60}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E6E9156-5D0A-4867-9D54-986AEDCF2D60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E6E9156-5D0A-4867-9D54-986AEDCF2D60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E6E9156-5D0A-4867-9D54-986AEDCF2D60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E6E9156-5D0A-4867-9D54-986AEDCF2D60}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2396A358-4FCA-44EA-8E43-9B0A166B7721}
+	EndGlobalSection
+EndGlobal
