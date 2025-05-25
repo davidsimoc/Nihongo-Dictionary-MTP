@@ -8,14 +8,38 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <local:AdminVisibilityConverter x:Key="AdminVisibility" />
+        <Style x:Key="RoundedSearchTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource NavBarColor}" />
+            <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="DataGridCellStyle" TargetType="DataGridCell">
             <Setter Property="Padding" Value="8,4" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontSize" Value="20" />
             <Setter Property="Background" Value="#2C2C2C" />
             <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+
         </Style>
-        <Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+                <Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
             <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
             <Setter Property="Foreground" Value="{StaticResource TextColor}" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -23,7 +47,7 @@
             <Setter Property="BorderThickness" Value="0,0,1,1" />
             <Setter Property="BorderBrush" Value="{StaticResource BorderColor}" />
             <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontSize" Value="22" />
         </Style>
         <Style TargetType="DataGrid">
             <Setter Property="Background" Value="{StaticResource NavBarColor}" />
@@ -31,6 +55,31 @@
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Margin" Value="8" />
             <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="RowHeight" Value="35"/>
+            <Setter Property="VerticalGridLinesBrush" Value="Transparent"/>
+            <Setter Property="RowStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                <Setter Property="Background" Value="#333333"/>
+                            </Trigger>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                <Setter Property="Background" Value="#2C2C2C"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
+                                <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+                                <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
     <Grid Background="{StaticResource BackgroundColor}">
@@ -39,15 +88,31 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0"
-                Content="Adaugă cuvânt"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Margin="0 10 10 0"
-                Padding="10"
-                Visibility="{Binding Path=DataContext.CurrentUserRole, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource AdminVisibility}}"
-                Click="AddWordButton_Click" />
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="8 10 8 0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Foreground="{StaticResource TextColor}" FontSize="16" Margin="0 0 5 0">Search:</Label>
 
+            <TextBox x:Name="searchTextBox"
+                     Style="{StaticResource RoundedSearchTextBoxStyle}"
+                     Width="200"
+                     Height="40"
+                     Margin="0 0 10 0"
+                     TextChanged="SearchTextBox_TextChanged"
+                     
+                     />
+            </StackPanel>
+
+            <Button Grid.Row="0"
+                    Content="Add new word"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="10 0 0 0"
+                    Padding="10"
+                    Width="140px"
+                    Visibility="{Binding Path=DataContext.CurrentUserRole, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource AdminVisibility}}"
+                    Click="AddWordButton_Click" />
+        </StackPanel>
+        
         <Border Grid.Row="1"
                 CornerRadius="10"
                 Background="{StaticResource NavBarColor}"
@@ -61,16 +126,19 @@
                       HeadersVisibility="Column"
                       RowBackground="{x:Null}"
                       BorderBrush="{x:Null}"
+                      
                       BorderThickness="0"
                       Foreground="{x:Null}"
                       CellStyle="{StaticResource DataGridCellStyle}"
-                      ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}">
+                      ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                      SelectionChanged="DgKanjiList_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nr." Binding="{Binding Index}" Width="auto" />
-                    <DataGridTextColumn Header="Kanji" Binding="{Binding Kanji}" Width="*" />
-                    <DataGridTextColumn Header="Onyomi Reading" Binding="{Binding Onyomi}" Width="*" />
-                    <DataGridTextColumn Header="Kunyomi Reading" Binding="{Binding Kunyomi}" Width="*" />
-                    <DataGridTextColumn Header="Meaning" Binding="{Binding Meaning}" Width="*" />
+                    
+                    <DataGridTextColumn Header="Nr." Binding="{Binding Index}" Width="auto" FontSize="20" />
+                    <DataGridTextColumn Header="Kanji" Binding="{Binding Kanji}" Width="*" FontSize="20"/>
+                    <DataGridTextColumn Header="Onyomi Reading" Binding="{Binding Onyomi}" Width="*" FontSize="20"/>
+                    <DataGridTextColumn Header="Kunyomi Reading" Binding="{Binding Kunyomi}" Width="*" FontSize="20"/>
+                    <DataGridTextColumn Header="Meaning" Binding="{Binding Meaning}" Width="*" FontSize="20" />
                 </DataGrid.Columns>
             </DataGrid>
         </Border>

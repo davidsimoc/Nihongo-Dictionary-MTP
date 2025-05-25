@@ -19,6 +19,7 @@ namespace Nihongo_Dictionary
         private MainWindow _mainWindow;
         private const string SessionFileName = "session.txt"; // Numele fișierului în care salvăm sesiunea
 
+        
         public LoginControl(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -41,7 +42,7 @@ namespace Nihongo_Dictionary
                 }
 
                 // Creează o instanță a MainAppView
-                var mainAppView = new MainAppView();
+                var mainAppView = new MainAppView(_mainWindow);
 
                 // Setează MainAppView ca conținut al MainContent în MainWindow
                 if (Window.GetWindow(this) is MainWindow mainWindow)
@@ -113,7 +114,7 @@ namespace Nihongo_Dictionary
                 try
                 {
                     connection.Open();
-                    string query = "SELECT Password, Role FROM Users WHERE Username = @Username";
+                    string query = "SELECT Username, Password, Role, AboutMe FROM Users WHERE Username = @Username";
                     using (SQLiteCommand command = new SQLiteCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Username", username);
@@ -125,10 +126,15 @@ namespace Nihongo_Dictionary
                                 if (password.Equals(storedPassword))
                                 {
                                     string? role = reader["Role"].ToString();
+                                    string? retrievedUsername = reader["Username"].ToString(); // Get username from DB
+                                    string? aboutMe = reader["AboutMe"].ToString();
                                     if (Window.GetWindow(this) is MainWindow mainWindow)
                                     {
                                         mainWindow.CurrentUserRole = role; // Use the property setter
                                     }
+
+                                    User user = new User(retrievedUsername, role, aboutMe);
+                                    _mainWindow.CurrentUser = user; // Store user in MainWindow
                                     return true;
                                 }
                             }
@@ -161,7 +167,7 @@ namespace Nihongo_Dictionary
                             return false;
                         }
                     }
-                    string insertQuery = "INSERT INTO Users (Username, Password) VALUES (@Username, @Password)";
+                    string insertQuery = "INSERT INTO Users (Username, Password, Role) VALUES (@Username, @Password, 'user')"; //added role
                     using (SQLiteCommand insertCommand = new SQLiteCommand(insertQuery, connection))
                     {
                         insertCommand.Parameters.AddWithValue("@Username", username);
@@ -200,12 +206,22 @@ namespace Nihongo_Dictionary
                     txtUsername.Text = username;
                     chkRememberMe.IsChecked = true;
 
-                    // Creează o instanță a MainAppView și o setează ca conținut
-                    var mainAppView = new MainAppView();
-                    if (Window.GetWindow(this) is MainWindow mainWindow)
+                    // Simulate login and get user data
+                    if (AuthenticateUser(username, "")) // Pass empty password since we only have username
                     {
-                        mainWindow.MainContent.Content = mainAppView;
+                        // Creează o instanță a MainAppView și o setează ca conținut
+                        var mainAppView = new MainAppView(_mainWindow);
+                        if (Window.GetWindow(this) is MainWindow mainWindow)
+                        {
+                            mainWindow.MainContent.Content = mainAppView;
+                        }
                     }
+                    else
+                    {
+                        // Clear session if authentication fails
+                        File.Delete(SessionFileName);
+                    }
+
                 }
                 catch (IOException ex)
                 {

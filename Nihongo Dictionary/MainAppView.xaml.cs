@@ -20,9 +20,11 @@ namespace Nihongo_Dictionary
     /// </summary>
     public partial class MainAppView : UserControl
     {
-        public MainAppView()
+        private MainWindow _mainWindow;  // Add a reference to the MainWindow
+        public MainAppView(MainWindow mainWindow)
         {
             InitializeComponent();
+            _mainWindow = mainWindow; // Store the MainWindow instance
             LoadMainContent(null, null); // Încarcă pagina principală implicit
         }
 
@@ -38,7 +40,9 @@ namespace Nihongo_Dictionary
 
         private void LoadProfileContent(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = new ProfileControl();
+            ProfileControl profileControl = new ProfileControl(_mainWindow);
+            profileControl.DataContext = _mainWindow; 
+            MainContent.Content = profileControl;
         }
     }
 }

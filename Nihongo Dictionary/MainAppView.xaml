@@ -49,9 +49,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Background="#2C2C2C" Width="200">
-            <Button Content="Main" Margin="10 5" Click="LoadMainContent" />
-            <Button Content="Lessons" Margin="10 5" Click="LoadLessonsContent" />
-            <Button Content="Profile" Margin="10 5" Click="LoadProfileContent" />
+            <Button Content="Main" Margin="10 10 10 5" Click="LoadMainContent" />
+            <Button Content="Lessons" Margin="10 10 10 5" Click="LoadLessonsContent" />
+            <Button Content="Profile" Margin="10 10 10 5" Click="LoadProfileContent" />
         </StackPanel>
 
         <ContentControl x:Name="MainContent" Grid.Row="0" Grid.Column="1" Margin="20" />

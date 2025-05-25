@@ -1,0 +1,212 @@
+﻿<UserControl x:Class="Nihongo_Dictionary.AddWordControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Nihongo_Dictionary"
+             mc:Ignorable="d"
+             >
+
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+            <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource SecondaryColor}" />
+                                <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AccentColor}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <ScrollViewer>
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Caracter:" Margin="0 10 0 0" VerticalAlignment="Center" Foreground="{StaticResource TextColor}"/>
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtCaracter" Margin="0 10 0 0" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+
+            <Label Grid.Row="1" Grid.Column="0" Content="Onyomi:" Margin="0 10 0 0" VerticalAlignment="Center" Foreground="{StaticResource TextColor}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtOnyomiSingle" Margin="0 10 0 0" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Content="Kunyomi:" Margin="0 10 0 0" VerticalAlignment="Center" Foreground="{StaticResource TextColor}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtKunyomiSingle" Margin="0 10 0 0" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+
+            <Label Grid.Row="3" Grid.Column="0" Content="Meaning:" Margin="0 10 0 0" VerticalAlignment="Center" Foreground="{StaticResource TextColor}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtMeaning" Margin="0 10 0 0" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" Height="30" FontSize="16"/>
+
+            <Label Grid.Row="4" Grid.Column="0" Content="Onyomi Words:" Margin="0 30 0 0" VerticalAlignment="Top" Foreground="{StaticResource TextColor}"/>
+            <StackPanel Grid.Row="4" Grid.Column="1" Margin="0 30 0 0">
+                <StackPanel Orientation="Horizontal" Margin="2">
+                    <Label Content="Text:" Width="60" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtOnyomiWord1Text" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Reading:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtOnyomiWord1Reading" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Meaning:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtOnyomiWord1Meaning" Width="150" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2">
+                    <Label Content="Text:" Width="60" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtOnyomiWord2Text" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Reading:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtOnyomiWord2Reading" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Meaning:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtOnyomiWord2Meaning" Width="150" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2">
+                    <Label Content="Text:" Width="60" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtOnyomiWord3Text" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Reading:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtOnyomiWord3Reading" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Meaning:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtOnyomiWord3Meaning" Width="150" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Label Grid.Row="5" Grid.Column="0" Content="Kunyomi Words:" Margin="0 30 0 0" VerticalAlignment="Top" Foreground="{StaticResource TextColor}"/>
+            <StackPanel Grid.Row="5" Grid.Column="1" Margin="0 30 0 0 ">
+                <StackPanel Orientation="Horizontal" Margin="2">
+                    <Label Content="Text:" Width="60" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtKunyomiWord1Text" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Reading:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtKunyomiWord1Reading" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Meaning:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtKunyomiWord1Meaning" Width="150" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2">
+                    <Label Content="Text:" Width="60" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtKunyomiWord2Text" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Reading:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtKunyomiWord2Reading" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Meaning:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtKunyomiWord2Meaning" Width="150" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="2">
+                    <Label Content="Text:" Width="60" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtKunyomiWord3Text" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Reading:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtKunyomiWord3Reading" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Meaning:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtKunyomiWord3Meaning" Width="150" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                </StackPanel>
+            </StackPanel>
+
+            <CheckBox Grid.Row="6" Grid.Column="0" Content="Special Readings:" Margin="0 10 0 0" VerticalAlignment="Center" x:Name="chkSpecialReadings" Foreground="{StaticResource TextColor}"/>
+            <StackPanel Grid.Row="7" Grid.Column="1" Margin="0 10 0 0" Orientation="Vertical" x:Name="specialReadingsPanel" Visibility="Collapsed">
+                <Label Content="Special Reading 1 (Text, Reading, Meaning):" Margin="5" Foreground="{StaticResource TextColor}"/>
+                <StackPanel Orientation="Horizontal" Margin="2">
+                    <Label Content="Text:" Width="60" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtSpecialReading1Text" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Reading:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtSpecialReading1Reading" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Meaning:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtSpecialReading1Meaning" Width="150" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                </StackPanel>
+                <Label Content="Special Reading 2 (Text, Reading, Meaning):" Margin="5" Foreground="{StaticResource TextColor}"/>
+                <StackPanel Orientation="Horizontal" Margin="2">
+                    <Label Content="Text:" Width="60" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtSpecialReading2Text" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Reading:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtSpecialReading2Reading" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                    <Label Content="Meaning:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtSpecialReading2Meaning" Width="150" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" FontSize="16"/>
+                </StackPanel>
+                <Label Content="Special Reading 3 (Text, Reading, Meaning):" Margin="5" Foreground="{StaticResource TextColor}"/>
+                <StackPanel Orientation="Horizontal" Margin="2">
+                    <Label Content="Text:" Width="60" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtSpecialReading3Text" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}"/>
+                    <Label Content="Reading:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtSpecialReading3Reading" Width="100" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}"/>
+                    <Label Content="Meaning:" Width="80" Foreground="{StaticResource TextColor}"/>
+                    <TextBox x:Name="txtSpecialReading3Meaning" Width="150" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Label Grid.Row="8" Grid.Column="0" Content="Example Sentences:" Margin="0 10 0 0" VerticalAlignment="Top" Foreground="{StaticResource TextColor}"/>
+            <StackPanel Grid.Row="8" Grid.Column="1" Margin="0 10 0 0 ">
+                <Label Content="Sentence 1:" Margin="2" Foreground="{StaticResource TextColor}"/>
+                <TextBox x:Name="txtExampleSentence1" Margin="2" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" Height="30" FontSize="16"/>
+                <Label Content="Reading 1:" Margin="2" Foreground="{StaticResource TextColor}"/>
+                <TextBox x:Name="txtExampleReading1" Margin="2" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" Height="30" FontSize="16"/>
+                <Label Content="Romanji 1:" Margin="2" Foreground="{StaticResource TextColor}"/>
+                <TextBox x:Name="txtExampleRomanji1" Margin="2" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" Height="30" FontSize="16"/>
+                <Label Content="Meaning 1:" Margin="2" Foreground="{StaticResource TextColor}"/>
+                <TextBox x:Name="txtExampleMeaning1" Margin="2" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}"  Height="30" FontSize="16"/>
+
+                <Label Grid.Row="9" Content="Sentence 2:" Margin="2" Foreground="{StaticResource TextColor}"/>
+                <TextBox x:Name="txtExampleSentence2" Margin="2" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}"  Height="30" FontSize="16"/>
+                <Label Content="Reading 2:" Margin="2" Foreground="{StaticResource TextColor}"/>
+                <TextBox x:Name="txtExampleReading2" Margin="2" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" Height="30" FontSize="16"/>
+                <Label Content="Romanji 2:" Margin="2" Foreground="{StaticResource TextColor}"/>
+                <TextBox x:Name="txtExampleRomanji2" Margin="2" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" Height="30" FontSize="16"/>
+                <Label Content="Meaning 2:" Margin="2" Foreground="{StaticResource TextColor}"/>
+                <TextBox x:Name="txtExampleMeaning2" Margin="2" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}"  Height="30" FontSize="16"/>
+
+                <Label Grid.Row="10" Content="Sentence 3:" Margin="2" Foreground="{StaticResource TextColor}"/>
+                <TextBox x:Name="txtExampleSentence3" Margin="2" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}"  Height="30" FontSize="16"/>
+                <Label Content="Reading 3:" Margin="2" Foreground="{StaticResource TextColor}"/>
+                <TextBox x:Name="txtExampleReading3" Margin="2" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" Height="30" FontSize="16"/>
+                <Label Content="Romanji 3:" Margin="2" Foreground="{StaticResource TextColor}"/>
+                <TextBox x:Name="txtExampleRomanji3" Margin="2" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" Height="30" FontSize="16"/>
+                <Label Content="Meaning 3:" Margin="2" Foreground="{StaticResource TextColor}"/>
+                <TextBox x:Name="txtExampleMeaning3" Margin="2" Background="{StaticResource SurfaceColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}" Height="30" FontSize="16"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="20" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20 0 0">
+                <Button Content="Salvare" Width="100" Margin="5" Click="SaveButton_Click"
+                        Background="{StaticResource PrimaryColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}"
+                        />
+                <Button Content="Anulează" Width="100" Margin="5" Click="CancelButton_Click"
+                        Background="{StaticResource SecondaryColor}" Foreground="{StaticResource TextColor}" BorderBrush="{StaticResource BorderColor}"
+                        />
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

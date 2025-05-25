@@ -1,0 +1,81 @@
+﻿<kanji_dictionary>
+  <kanji>
+    <caracter>日</caracter>
+    <onyomi>
+      <reading>ニチ</reading>
+      <reading>ジツ</reading>
+    </onyomi>
+    <kunyomi>
+      <reading>ひ</reading>
+      <reading>-び</reading>
+      <reading>-か</reading>
+    </kunyomi>
+    <meaning>day, sun, Japan, counter for days</meaning>
+    <onyomi_words>
+      <word>
+        <text>同日</text>
+        <reading>どうじつ</reading>
+        <meaning>the same day</meaning>
+      </word>
+      <word>
+        <text>前日</text>
+        <reading>ぜんじつ</reading>
+        <meaning>previous day, day before</meaning>
+      </word>
+      <word>
+        <text>毎日</text>
+        <reading>まいにち</reading>
+        <meaning>every day</meaning>
+      </word>
+      <word>
+        <text>日常</text>
+        <reading>にちじょう</reading>
+        <meaning>ordinary, regular</meaning>
+      </word>
+    </onyomi_words>
+    <kunyomi_words>
+      <word>
+        <text>記念日</text>
+        <reading>きねんび</reading>
+        <meaning>anniversary, memorial day</meaning>
+      </word>
+    </kunyomi_words>
+    <special_readings>
+      <word>
+        <text>今日</text>
+        <reading>きょう</reading>
+        <meaning>today, this day</meaning>
+      </word>
+      <word>
+        <text>明日</text>
+        <reading>あした</reading>
+        <meaning>tomorrow</meaning>
+      </word>
+      <word>
+        <text>昨日</text>
+        <reading>きのう</reading>
+        <meaning>yesterday</meaning>
+      </word>
+    </special_readings>
+    <examples>
+      <example>
+        <sentence>1. 毎日、日本語を勉強します。</sentence>
+        <reading>まいにち、にほんごをべんきょうします。</reading>
+        <romanji>mainichi nihongo o benkyou shimasu.</romanji>
+        <meaning>I study Japanese everyday.</meaning>
+      </example>
+      <example>
+        <sentence>2. ある日、私は彼に会った。</sentence>
+        <reading>あるひ、わたしはかれにあった。</reading>
+        <romanji>aru hi, watashi wa kare ni atta.</romanji>
+        <meaning>One day I met him.</meaning>
+      </example>
+      <example>
+        <sentence>3. 私は数日間休みます。</sentence>
+        <reading>わたしはすうじつかんやすみます。</reading>
+        <romanji>watashi wa suujitsukan yasumimasu.</romanji>
+        <meaning>I'm going to take off a few days.</meaning>
+      </example>
+    </examples>
+  </kanji>
+</kanji_dictionary>

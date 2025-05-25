@@ -22,6 +22,19 @@ namespace Nihongo_Dictionary
 
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        private User _currentUser;
+        public User CurrentUser
+        {
+            get { return _currentUser; }
+            set
+            {
+                if (_currentUser != value)
+                {
+                    _currentUser = value;
+                    OnPropertyChanged(nameof(CurrentUser)); // Notify about CurrentUser
+                }
+            }
+        }
         private string? _currentUserRole;
         public string? CurrentUserRole
         {
@@ -47,12 +60,13 @@ namespace Nihongo_Dictionary
         {
             InitializeComponent();
             DataContext = this;
-            MainContent.Content = new LoginControl(this);
+            LoginControl loginControl = new LoginControl(this); // Pass 'this' (the MainWindow instance)
+            MainContent.Content = loginControl;
         }
 
         public void LoadDictionaryView()
         {
-            MainContent.Content = new MainAppView();
+            MainContent.Content = new MainAppView(mainWindow);
         }
     }
 }
