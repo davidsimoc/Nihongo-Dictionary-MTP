@@ -39,7 +39,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
 
         </Style>
-                <Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+        <Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
             <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
             <Setter Property="Foreground" Value="{StaticResource TextColor}" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -81,6 +81,32 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="DeleteButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="{StaticResource AccentColor}" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#33FF5555" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     <Grid Background="{StaticResource BackgroundColor}">
         <Grid.RowDefinitions>
@@ -90,9 +116,9 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="8 10 8 0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Foreground="{StaticResource TextColor}" FontSize="16" Margin="0 0 5 0">Search:</Label>
+                <Label Foreground="{StaticResource TextColor}" FontSize="16" Margin="0 0 5 0">Search:</Label>
 
-            <TextBox x:Name="searchTextBox"
+                <TextBox x:Name="searchTextBox"
                      Style="{StaticResource RoundedSearchTextBoxStyle}"
                      Width="200"
                      Height="40"
@@ -101,6 +127,8 @@
                      
                      />
             </StackPanel>
+
+
 
             <Button Grid.Row="0"
                     Content="Add new word"
@@ -111,8 +139,26 @@
                     Width="140px"
                     Visibility="{Binding Path=DataContext.CurrentUserRole, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource AdminVisibility}}"
                     Click="AddWordButton_Click" />
+
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"
+    Visibility="{Binding Path=DataContext.CurrentUserRole, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource AdminVisibility}}">
+                <Label Foreground="{StaticResource TextColor}" FontSize="16" Margin="10 0 5 0" VerticalAlignment="Center">Delete Kanji:</Label>
+                <TextBox x:Name="deleteKanjiTextBox"
+     Style="{StaticResource RoundedSearchTextBoxStyle}"
+     Width="100"
+     Height="40"
+     Margin="0 0 10 0" />
+                <Button Content="Delete"
+    VerticalAlignment="Center"
+    Padding="10"
+    Width="100"
+    Command="{Binding DeleteKanjiCommand}"
+    CommandParameter="{Binding ElementName=deleteKanjiTextBox, Path=Text}"
+    Style="{StaticResource DeleteButtonStyle}" />
+            </StackPanel>
         </StackPanel>
-        
+
         <Border Grid.Row="1"
                 CornerRadius="10"
                 Background="{StaticResource NavBarColor}"
@@ -133,13 +179,15 @@
                       ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
                       SelectionChanged="DgKanjiList_SelectionChanged">
                 <DataGrid.Columns>
-                    
+
                     <DataGridTextColumn Header="Nr." Binding="{Binding Index}" Width="auto" FontSize="20" />
                     <DataGridTextColumn Header="Kanji" Binding="{Binding Kanji}" Width="*" FontSize="20"/>
                     <DataGridTextColumn Header="Onyomi Reading" Binding="{Binding Onyomi}" Width="*" FontSize="20"/>
                     <DataGridTextColumn Header="Kunyomi Reading" Binding="{Binding Kunyomi}" Width="*" FontSize="20"/>
                     <DataGridTextColumn Header="Meaning" Binding="{Binding Meaning}" Width="*" FontSize="20" />
+
                 </DataGrid.Columns>
+
             </DataGrid>
         </Border>
     </Grid>

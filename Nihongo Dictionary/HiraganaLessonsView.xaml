@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="Nihongo_Dictionary.HiraganaLessonsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Nihongo_Dictionary"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+            <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource SecondaryColor}" />
+                                <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AccentColor}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
+    <StackPanel Background="{StaticResource BackgroundColor}">
+        <Button Content="Back"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Margin="20"
+        Padding="10"
+        FontSize="14"
+        Width="60px"
+        Click="BackButton_Click"/>
+        <TextBlock Text="Hiragana Lessons" Style="{StaticResource TitleTextStyle}" Margin="20"/>
+
+        <Button Style="{StaticResource LessonCardStyle}" Tag="HiraganaFirstRow" Click="LessonCard_Click">
+            <StackPanel>
+                <TextBlock Text="Hiragana First Row" Style="{StaticResource LessonTitleStyle}"/>
+                <TextBlock Text="Learn the first row of Hiragana characters" Style="{StaticResource LessonDescriptionStyle}"/>
+            </StackPanel>
+        </Button>
+
+        <Button Style="{StaticResource LessonCardStyle}" Tag="HiraganaSecondRow" Click="LessonCard_Click">
+            <StackPanel>
+                <TextBlock Text="Hiragana Second Row" Style="{StaticResource LessonTitleStyle}"/>
+                <TextBlock Text="Continue with the second row of Hiragana." Style="{StaticResource LessonDescriptionStyle}"/>
+            </StackPanel>
+        </Button>
+
+        <Button Style="{StaticResource LessonCardStyle}" Tag="HiraganaThirdRow" Click="LessonCard_Click">
+            <StackPanel>
+                <TextBlock Text="Hiragana Third Row" Style="{StaticResource LessonTitleStyle}"/>
+                <TextBlock Text="Explore the third row of Hiragana characters." Style="{StaticResource LessonDescriptionStyle}"/>
+            </StackPanel>
+        </Button>
+
+        <Button Style="{StaticResource LessonCardStyle}" Tag="HiraganaThirdRow" Click="LessonCard_Click">
+            <StackPanel>
+                <TextBlock Text="Hiragana Forth Row" Style="{StaticResource LessonTitleStyle}"/>
+                <TextBlock Text="Learn the forth row of Hiragana characters." Style="{StaticResource LessonDescriptionStyle}"/>
+            </StackPanel>
+        </Button>
+    </StackPanel>
+</UserControl>

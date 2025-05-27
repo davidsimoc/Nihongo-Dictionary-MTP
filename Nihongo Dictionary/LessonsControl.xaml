@@ -6,7 +6,23 @@
              xmlns:local="clr-namespace:Nihongo_Dictionary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="{StaticResource BackgroundColor}">
-        <TextBlock Text="Lecții" FontSize="36" Foreground="{StaticResource TextColor}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-    </Grid>
+    <StackPanel Background="{StaticResource BackgroundColor}">
+        <TextBlock Text="Lessons" Style="{StaticResource TitleTextStyle}" Margin="20"/>
+
+        <Button Style="{StaticResource LessonCardStyle}" Tag="HiraganaRows" Click="HiraganaLessons_Click">
+            <StackPanel>
+                <TextBlock Text="Hiragana Basics" Style="{StaticResource LessonTitleStyle}"/>
+                <TextBlock Text="Learn the fundamental Hiragana characters." Style="{StaticResource LessonDescriptionStyle}"/>
+            </StackPanel>
+        </Button>
+
+        <Button Style="{StaticResource LessonCardStyle}" Tag="HiraganaRows" Click="KatakanaLessons_Click">
+            <StackPanel>
+                <TextBlock Text="Katakana Basics" Style="{StaticResource LessonTitleStyle}"/>
+                <TextBlock Text="Master the Katakana writing system." Style="{StaticResource LessonDescriptionStyle}"/>
+            </StackPanel>
+        </Button>
+
+
+    </StackPanel>
 </UserControl>

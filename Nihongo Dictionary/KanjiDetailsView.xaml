@@ -9,6 +9,7 @@
              Background="{StaticResource BackgroundColor}"
              Foreground="{StaticResource TextColor}">
     <UserControl.Resources>
+        <local:AdminVisibilityConverter x:Key="AdminVisibility" />
         <Style x:Key="ReadingLabelStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="18" />
             <Setter Property="FontWeight" Value="SemiBold" />
@@ -112,6 +113,7 @@
                 FontSize="14"
                 Width="60px"
                 Click="BackButton_Click"/>
+        
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
             <StackPanel Margin="20">
                 <TextBlock x:Name="KanjiSymbolTextBlock" FontSize="72" Foreground="{StaticResource SecondaryColor}" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>

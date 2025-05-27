@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 
 
 namespace Nihongo_Dictionary
@@ -56,6 +57,8 @@ namespace Nihongo_Dictionary
         private ObservableCollection<KanjiEntry> _kanjiList;
         private ObservableCollection<KanjiEntry> _originalKanjiList;
 
+        public ICommand DeleteKanjiCommand { get; private set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName = null)
@@ -70,9 +73,108 @@ namespace Nihongo_Dictionary
             _originalKanjiList = new ObservableCollection<KanjiEntry>();
             LoadKanjiDataFromXml();
             dgKanjiList.ItemsSource = _kanjiList;
-            dgKanjiList.SelectionChanged += DgKanjiList_SelectionChanged; // Adaugă event handler-ul
-            DataContext = this; // Important for Binding!
+            dgKanjiList.SelectionChanged += DgKanjiList_SelectionChanged; 
+            DataContext = this;
+
+            DeleteKanjiCommand = new RelayCommand<string>(DeleteKanji);
         }
+
+        public void DeleteKanji(string kanjiToDelete)
+        {
+            if (string.IsNullOrWhiteSpace(kanjiToDelete))
+            {
+                MessageBox.Show("Vă rugăm să introduceți un Kanji valid.", "Eroare", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var itemToDelete = _kanjiList.FirstOrDefault(k => k.Kanji == kanjiToDelete);
+            if (itemToDelete == null)
+            {
+                MessageBox.Show($"Kanji-ul '{kanjiToDelete}' nu a fost găsit în listă.", "Eroare", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (MessageBox.Show($"Sigur doriți să ștergeți '{kanjiToDelete}'?", "Confirmare Ștergere", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                _kanjiList.Remove(itemToDelete);
+                _originalKanjiList.Remove(itemToDelete);
+                SaveKanjiDataToXml();
+                OnPropertyChanged(nameof(KanjiList));
+                MessageBox.Show($"Kanji-ul '{kanjiToDelete}' a fost șters cu succes.", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void SaveKanjiDataToXml()
+        {
+            string FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "kanji.xml");
+            XDocument xmlDoc = new XDocument(
+                new XElement("kanji_list",
+                    _kanjiList.Select(kanjiEntry =>
+                        new XElement("kanji",
+                            new XElement("caracter", kanjiEntry.Kanji),
+                            new XElement("onyomi", kanjiEntry.Onyomi.Split(',').Select(o => new XElement("reading", o.Trim()))),
+                            new XElement("kunyomi", kanjiEntry.Kunyomi.Split(',').Select(k => new XElement("reading", k.Trim()))),
+                            new XElement("meaning", kanjiEntry.Meaning),
+                            new XElement("onyomi_words", kanjiEntry.OnyomiWords?.Select(w => new XElement("word",
+                                new XElement("text", w.Word),
+                                new XElement("reading", w.Reading),
+                                new XElement("meaning", w.Meaning)))),
+                            new XElement("kunyomi_words", kanjiEntry.KunyomiWords?.Select(w => new XElement("word",
+                                new XElement("text", w.Word),
+                                new XElement("reading", w.Reading),
+                                new XElement("meaning", w.Meaning)))),
+                            new XElement("special_readings", kanjiEntry.SpecialReadings?.Select(w => new XElement("word",
+                                new XElement("text", w.Word),
+                                new XElement("reading", w.Reading),
+                                new XElement("meaning", w.Meaning)))),
+                            new XElement("examples", kanjiEntry.Examples?.Select(ex => new XElement("example",
+                                new XElement("sentence", ex.Sentence),
+                                new XElement("reading", ex.Reading),
+                                new XElement("romanji", ex.Romanji),
+                                new XElement("meaning", ex.Meaning)))))
+                    )
+                )
+            );
+
+            try
+            {
+                xmlDoc.Save(FileName);
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"Eroare la salvarea fișierului XML: {ex.Message}");
+            }
+        }
+
+    public class RelayCommand<T> : ICommand
+        {
+            private readonly Action<T> _execute;
+            private readonly Predicate<T> _canExecute;
+
+            public RelayCommand(Action<T> execute, Predicate<T> canExecute = null)
+            {
+                _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+                _canExecute = canExecute;
+            }
+
+            public bool CanExecute(object parameter)
+            {
+                bool canExecute = _canExecute == null || _canExecute((T)parameter);
+                Console.WriteLine($"CanExecute called with parameter: {parameter}, result: {canExecute}");
+                return canExecute;
+            }
+            public void Execute(object parameter)
+            {
+                Console.WriteLine($"Execute called with parameter: {parameter}");
+                _execute((T)parameter);
+            }
+            public event EventHandler CanExecuteChanged
+            {
+                add { CommandManager.RequerySuggested += value; }
+                remove { CommandManager.RequerySuggested -= value; }
+            }
+        }
+
         private void LoadKanjiDataFromXml()
         {
             string FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "kanji.xml");
@@ -123,7 +225,6 @@ namespace Nihongo_Dictionary
                     }).ToList() ?? new List<ExampleInfo>()
                 }).ToList();
 
-                // Setează sursa de date pentru DataGrid
                 _originalKanjiList = new ObservableCollection<KanjiEntry>(kanjiList);  //store the original list.
                 _kanjiList = new ObservableCollection<KanjiEntry>(kanjiList); // Also set the _kanjiList
                 dgKanjiList.ItemsSource = _kanjiList;

@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 using System.Threading.Tasks;
 using System.IO;
 using System.Media;
+using static Nihongo_Dictionary.DictionaryControl;
+using System.Xml.Linq;
 
 namespace Nihongo_Dictionary
 {
@@ -32,6 +34,8 @@ namespace Nihongo_Dictionary
         {
             InitializeComponent();
             InitializeSpeechSynthesizer();
+            DataContext = this;
+
         }
 
         private async void InitializeSpeechSynthesizer()

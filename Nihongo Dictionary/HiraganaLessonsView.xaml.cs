@@ -16,44 +16,36 @@ using System.Windows.Shapes;
 namespace Nihongo_Dictionary
 {
     /// <summary>
-    /// Interaction logic for LessonsControl.xaml
+    /// Interaction logic for HiraganaLessonsView.xaml
     /// </summary>
-    public partial class LessonsControl : UserControl
+    public partial class HiraganaLessonsView : UserControl
     {
-        public LessonsControl()
+        public HiraganaLessonsView()
         {
             InitializeComponent();
         }
-
-        private void HiraganaLessons_Click(object sender, RoutedEventArgs e)
+        private void LessonCard_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button clickedButton)
             {
                 string tag = clickedButton.Tag as string;
-                if (tag == "HiraganaRows")
+                if (tag == "HiraganaFirstRow")
                 {
                     if (Window.GetWindow(this) is MainWindow mainWindow)
                     {
-                        mainWindow.MainContent.Content = new HiraganaLessonsView();
+                        mainWindow.MainContent.Content = new HiraganaFirstRowPageView(mainWindow);
                     }
                 }
             }
         }
 
-        private void KatakanaLessons_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button clickedButton)
+            if (Window.GetWindow(this) is MainWindow mainWindow)
             {
-                string tag = clickedButton.Tag as string;
-                if (tag == "HiraganaRows")
-                {
-                    if (Window.GetWindow(this) is MainWindow mainWindow)
-                    {
-                        
-                    }
-                }
+                mainWindow.MainContent.Content = new MainAppView(mainWindow);
             }
         }
-
     }
+    
 }

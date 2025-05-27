@@ -24,16 +24,15 @@ namespace Nihongo_Dictionary
         public MainAppView(MainWindow mainWindow)
         {
             InitializeComponent();
-            _mainWindow = mainWindow; // Store the MainWindow instance
-            LoadMainContent(null, null); // Încarcă pagina principală implicit
+            _mainWindow = mainWindow;
+            LoadMainContent(null, null); 
         }
 
         private void LoadMainContent(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new DictionaryControl();
         }
-
-        private void LoadLessonsContent(object sender, RoutedEventArgs e)
+        public void LoadLessonsContent(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new LessonsControl();
         }
