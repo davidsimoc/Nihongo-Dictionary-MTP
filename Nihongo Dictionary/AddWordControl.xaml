@@ -40,7 +40,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <ScrollViewer>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
         <Grid Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

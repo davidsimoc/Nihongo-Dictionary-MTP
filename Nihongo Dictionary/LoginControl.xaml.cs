@@ -38,10 +38,9 @@ namespace Nihongo_Dictionary
                 System.Diagnostics.Debug.WriteLine($"CurrentUserRole after login: {_mainWindow.CurrentUserRole}");
                 if (rememberMe)
                 {
-                    SaveSession(username); // Salvăm sesiunea dacă utilizatorul a bifat "Ține-mă minte"
+                    SaveSession(username); 
                 }
 
-                // Creează o instanță a MainAppView
                 var mainAppView = new MainAppView(_mainWindow);
 
                 // Setează MainAppView ca conținut al MainContent în MainWindow
